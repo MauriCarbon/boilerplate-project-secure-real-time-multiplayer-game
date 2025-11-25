@@ -53,4 +53,15 @@ const server = app.listen(portNum, '0.0.0.0', () => {
   }
 });
 
+// Initialize Socket.IO
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('New client connected:', socket.id);
+  
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
+
 module.exports = app; // For testing
